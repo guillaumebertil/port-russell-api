@@ -19,7 +19,7 @@ const userSchema = new mongoose.Schema({
     password: {
         type     : String,
         required : [true, 'Le mot de passe est requis'],
-        mingleght: [8, 'Le mot de passe doit contenir au moins 8 caractères']
+        minlength: [8, 'Le mot de passe doit contenir au moins 8 caractères']
     }
 }, {
     timestamps: true
@@ -35,6 +35,7 @@ userSchema.pre('save', async function () {
 
     // Chiffrer le mot de passe
     this.password = await bcrypt.hash(this.password, salt);
+
 });
 
 // Méthode pour comparer les mots de passe lors du login
