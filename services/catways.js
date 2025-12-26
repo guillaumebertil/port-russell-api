@@ -66,7 +66,7 @@ exports.createCatway = async (req, res, next) => {
 };
 
 /**
- * Mettre à jour un catway (seulement le catwayState)
+ * Mettre à jour un catway (seulement l'état du catway)
  * @param {Object} req - Requête Express
  * @param {Object} res - Réponse Express
  * @param {Function} next - Fonction next

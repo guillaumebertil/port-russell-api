@@ -8,8 +8,9 @@ const cors          = require('cors');
 const { initClientDbConnection } = require('./db/mongo');
 
 // Import des routes
-const indexRouter = require('./routes/index');
-const usersRouter = require('./routes/users');
+const indexRouter   = require('./routes/index');
+const usersRouter   = require('./routes/users');
+const catwaysRouter = require('./routes/catways');
 
 // Initialisation de l'app Express
 const app = express();
@@ -46,6 +47,7 @@ app.use(cors({
 // Routes
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/catways', catwaysRouter);
 
 // Gestion erreur 404
 app.use((req, res, next) => {
