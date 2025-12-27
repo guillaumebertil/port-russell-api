@@ -1,13 +1,16 @@
-const express = require('express');
-const router = express.Router();
+const express     = require('express');
+const router      = express.Router();
 const authService = require('../services/auth')
 
 /**
  * GET / - Page d'accueil
  */
 router.get('/', (req, res) => {
-    res.send('API Port de Plaisance Russell');
+    res.render('index', {
+        title: 'API Port de Plaisance Russell'
+    });
 });
+
 
 /**
  * POST /login - Authentification

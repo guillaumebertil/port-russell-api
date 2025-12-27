@@ -3,6 +3,7 @@ const path          = require('path');
 const cookieParser  = require('cookie-parser');
 const logger        = require('morgan');
 const cors          = require('cors');
+const expressLayouts = require('express-ejs-layouts');
 
 // Import de la connexion MongoDB
 const { initClientDbConnection } = require('./db/mongo');
@@ -21,7 +22,11 @@ initClientDbConnection();
 
 // Configuration de EJS
 app.set('views', path.join(__dirname, 'views'));
-app.set('views engine', 'ejs');
+app.set('view engine', 'ejs');
+
+// Configuration de EJS Layouts
+app.use(expressLayouts);
+app.set('layout', 'layout');
 
 // Middlewares
 // Logger

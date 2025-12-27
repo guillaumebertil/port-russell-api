@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title><%= title %></title>
+
+    <!-- Importation de Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+
+    <!-- Importation de Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+  </head>
+  <body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <h2>Menu</h2>
+        </div>
+    </header>
+
+    <!-- Main -->
+    <main>
+        <div class="container border shadow p-0">
+            <div class="bg-primary">
+                <h1 class="text-center text-light"><%= title %></h1>
+            </div>
+            <%- body %>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container bg-primary py-2">
+            <p class="text-center text-light">Copyright <i class="bi bi-c-circle-fill"></i> 2025 - Port de Plaisance Russell</p>
+        </div>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+  </body>
+</html>
