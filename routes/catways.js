@@ -1,30 +1,31 @@
 const express       = require('express');
 const router        = express.Router();
 const catwayService = require('../services/catways');
+const auth          = require('../middlewares/auth')
 
 /**
- * GET /catways - Récupérer l'ensemble des catways
+ * GET /catways - Récupérer l'ensemble des catways (protégé)
  */
-router.get('/', catwayService.getAllCatways);
+router.get('/', auth.checkToken, catwayService.getAllCatways);
 
 /**
- * GET /catways/:id - Récupérer un catway par son numéro
+ * GET /catways/:id - Récupérer un catway par son numéro (protégé)
  */
-router.get('/:id', catwayService.getCatwayByNumber);
+router.get('/:id', auth.checkToken, catwayService.getCatwayByNumber);
 
 /**
- * POST /catways - Créer un nouveau catway
+ * POST /catways - Créer un nouveau catway (protégé)
  */
-router.post('/', catwayService.createCatway);
+router.post('/', auth.checkToken, catwayService.createCatway);
 
 /**
- * PUT /catways/:id - Modifier l'état d'un catway
+ * PUT /catways/:id - Modifier l'état d'un catway (protégé)
  */
-router.put('/:id', catwayService.updateCatway);
+router.put('/:id', auth.checkToken, catwayService.updateCatway);
 
 /**
- * DELETE /catways/:id - Supprimer un catway
+ * DELETE /catways/:id - Supprimer un catway (protégé)
  */
-router.delete('/:id', catwayService.deleteCatway);
+router.delete('/:id', auth.checkToken, catwayService.deleteCatway);
 
 module.exports = router;
