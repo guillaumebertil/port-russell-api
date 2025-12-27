@@ -23,7 +23,7 @@ exports.getAllReservations = async (req, res, next) => {
  * @param {Object} res - Réponse Express
  * @param {Function} next - Fonction next
  */
-exports.getReservationByCatway = async (req, res, next) => {
+exports.getReservationsByCatway = async (req, res, next) => {
     const catwayNumber = parseInt(req.params.id);
 
     try {
@@ -175,6 +175,29 @@ exports.getCurrentReservations = async (req, res, next) => {
         }).sort({ startDate: -1 });
 
         return res.status(200).json(reservations);
+
+    } catch (error) {
+        return res.status(500).json({ error: error.message });
+    }
+};
+
+/**
+ * Supprimer une réservation
+ * @param {Object} req - Requête Express
+ * @param {Object} res - Réponse Express
+ * @param {Function} next - Fonction next
+ */
+exports.deleteReservation = async (req, res, next) => {
+    const reservationId = req.params.idReservation;
+
+    try {
+        const deleted = await Reservation.findByIdAndDelete(reservationId);
+
+        if (!deleted) {
+            return res.status(404).json({ error: 'Réservation non trouvée' });
+        }
+
+        return res.status(200).json({ message: 'Réservation supprimée' });
 
     } catch (error) {
         return res.status(500).json({ error: error.message });

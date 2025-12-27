@@ -8,7 +8,7 @@ const bcrypt = require('bcrypt');
  * @param {Object} res - Réponse Express
  * @param {Function} next - Fonction Next
  */
-exports.authenticate = async (req, res, next) => {
+exports.login = async (req, res, next) => {
     const { email, password } = req.body;
 
     try {
