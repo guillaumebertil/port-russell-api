@@ -1,13 +1,57 @@
-<h2 class="text-center">Page d'accueil</h2>
-<div class="ps-4">
-    <h3>Présentations</h3>
-    <p>
-        Cette application permet à la capitainerie du Port de Plaisance Russell de gérer efficacement les réservations des catways (appontements pour bateaux).
-    </p>
-    <ul>
-        <li>Gestion des catways (état, type, numéro)</li>
-        <li>Gestion des réservations avec vérification des disponibilités</li>
-        <li>Gestion des utilisateurs de la capitainerie</li>
-        <li>API REST complète et documentée</li>
-    </ul>
+<div class="container">
+
+    <div class="row justify-content-center g-4">
+        <!-- Présentations -->
+        <div class="col-12 col-md-8">
+            <div class="card border shadow">
+                <div class="card-header h3 text-center">
+                        Présentations
+                    </div>
+                <div class="ps-4">
+                    <p>
+                        Cette application permet à la capitainerie du Port de Plaisance Russell de gérer efficacement les réservations des catways (appontements pour bateaux).
+                    </p>
+                    <ul>
+                        <li>Gestion des catways (état, type, numéro)</li>
+                        <li>Gestion des réservations avec vérification des disponibilités</li>
+                        <li>Gestion des utilisateurs de la capitainerie</li>
+                        <li>API REST complète et documentée</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Menu de connexion -->
+        <div class="col-12 col-md-4">
+            <div class="card mx-auto">
+                <div class="card-header h3 text-center">
+                    <i class="bi bi-door-open-fill"></i> Connexion
+                </div>
+                <div class="card-body">
+                    <div class="row align-items-center mb-2">
+
+                        <!-- Formulaire -->
+                        <form action="/login" method="POST">
+                            <!-- Email -->
+                            <label for="email" class="form-label">
+                                <i class="bi bi-envelope-at-fill"></i> Email :
+                            </label>
+                            <input type="email" class="form-control mb-2" id="email" name="email" placeholder="votre email" required>
+
+                            <!-- Password -->
+                            <label for="password" class="form-label">
+                                <i class="bi bi-incognito"></i> Mot de passe :
+                            </label>
+                            <input type="password" class="form-control mb-2" id="password" name="password" placeholder="votre mot de passe" required>
+                    
+                            <!-- Bouton de connexion -->
+                            <div class="text-center mt-3">
+                                <bouton type="submit" class="btn btn-danger">Connexion</bouton>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

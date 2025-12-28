@@ -1,40 +1,86 @@
 <!doctype html>
 <html lang="fr">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title><%= title %></title>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title><%= title %></title>
 
-    <!-- Importation de Bootstrap -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+        <!-- Importation de Bootstrap -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
 
-    <!-- Importation de Bootstrap Icons -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
-  </head>
-  <body>
+        <!-- Importation de Bootstrap Icons -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    </head>
+
+    <!-- Body -->
+    <body class="d-flex flex-column min-vh-100">
+
     <!-- Header -->
     <header>
+        <!-- Titre de la page -->
         <div class="container">
-            <h2>Menu</h2>
+            <h1 class="text-center">Port de plaisance de Russell 🚢</h1>
         </div>
+
+        <!-- Menu -->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav mx-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/dashboard">
+                                <i class="bi bi-speedometer2"></i> Tableau de bord
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/catways">
+                                <i class="bi bi-water"></i> Catways
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/reservations">
+                                <i class="bi bi-calendar-check"></i> Réservations
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/users">
+                                <i class="bi bi-people"></i> Utilisateurs
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/api-docs" target="_blank">
+                                <i class="bi bi-file-text"></i> Documentation API
+                            </a>
+                        </li>
+                        <li class="nav-item bg-danger rounded ms-4">
+                            <a class="nav-link text-light" href="/logout">
+                                <i class="bi bi-box-arrow-right"></i> Déconnexion
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
     </header>
 
     <!-- Main -->
-    <main>
-        <div class="container border shadow p-0">
-            <div class="bg-primary">
-                <h1 class="text-center text-light"><%= title %></h1>
-            </div>
+    <main class="flex-grow-1 py-4">
+        <div class="container">
             <%- body %>
         </div>
     </main>
 
     <!-- Footer -->
-    <footer>
-        <div class="container bg-primary py-2">
-            <p class="text-center text-light">Copyright <i class="bi bi-c-circle-fill"></i> 2025 - Port de Plaisance Russell</p>
+    <footer class="bg-primary py-2 text-center text-light">
+        <div class="container">
+            <p class="">Copyright <i class="bi bi-c-circle-fill"></i> 2025 - Port de Plaisance Russell</p>
         </div>
     </footer>
+
+    <!-- Importation de Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
-  </body>
+    </body>
 </html>

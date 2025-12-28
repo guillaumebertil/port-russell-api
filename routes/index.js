@@ -7,7 +7,7 @@ const authService = require('../services/auth')
  */
 router.get('/', (req, res) => {
     res.render('index', {
-        title: 'API Port de Plaisance Russell'
+        title: 'Page d\'accueil'
     });
 });
 
