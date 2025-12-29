@@ -1,0 +1,83 @@
+<div class="container">
+    
+    <!-- En-tête -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <h2>
+                <i class="bi bi-pencil"></i> Modifier le catway n°<%= catway.catwayNumber %>
+            </h2>
+        </div>
+    </div>
+
+    <!-- Formulaire -->
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow">
+                <div class="card-body">
+                    
+                    <% if (error) { %>
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <i class="bi bi-exclamation-triangle"></i> <%= error %>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    </div>
+                    <% } %>
+
+                    <form action="/catways/<%= catway.catwayNumber %>/edit" method="POST">
+                        
+                        <!-- Numéro (non modifiable) -->
+                        <div class="mb-3">
+                            <label for="catwayNumber" class="form-label">
+                                <i class="bi bi-hash"></i> Numéro du catway
+                            </label>
+                            <input 
+                                type="number" 
+                                class="form-control" 
+                                id="catwayNumber" 
+                                value="<%= catway.catwayNumber %>"
+                                disabled
+                            >
+                            <small class="text-muted">Le numéro ne peut pas être modifié</small>
+                        </div>
+
+                        <!-- Type (non modifiable) -->
+                        <div class="mb-3">
+                            <label for="catwayType" class="form-label">
+                                <i class="bi bi-diagram-3"></i> Type
+                            </label>
+                            <select class="form-select" id="catwayType" disabled>
+                                <option value="short" <%= catway.catwayType === 'short' ? 'selected' : '' %>>Short</option>
+                                <option value="long" <%= catway.catwayType === 'long' ? 'selected' : '' %>>Long</option>
+                            </select>
+                            <small class="text-muted">Le type ne peut pas être modifié</small>
+                        </div>
+
+                        <!-- État (MODIFIABLE) -->
+                        <div class="mb-3">
+                            <label for="catwayState" class="form-label">
+                                <i class="bi bi-info-circle"></i> État *
+                            </label>
+                            <textarea 
+                                class="form-control" 
+                                id="catwayState" 
+                                name="catwayState" 
+                                rows="3"
+                                required
+                            ><%= catway.catwayState %></textarea>
+                            <small class="text-muted">Seul l'état peut être modifié</small>
+                        </div>
+
+                        <!-- Boutons -->
+                        <div class="d-flex justify-content-between">
+                            <a href="/catways" class="btn btn-secondary">
+                                <i class="bi bi-x-circle"></i> Annuler
+                            </a>
+                            <button type="submit" class="btn btn-warning">
+                                <i class="bi bi-check-circle"></i> Modifier
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
