@@ -30,6 +30,13 @@
                 <div class="card-body">
                     <div class="row align-items-center mb-2">
 
+                        <% if (error) { %>
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <i class="bi bi-exclamation-triangle"></i> <%= error %>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                        </div>
+                        <% } %>
+
                         <!-- Formulaire -->
                         <form action="/login" method="POST">
                             <!-- Email -->
@@ -46,7 +53,7 @@
                     
                             <!-- Bouton de connexion -->
                             <div class="text-center mt-3">
-                                <bouton type="submit" class="btn btn-danger">Connexion</bouton>
+                                <button type="submit" class="btn btn-danger">Connexion</bouton>
                             </div>
                         </form>
                     </div>

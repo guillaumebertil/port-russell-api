@@ -29,3 +29,38 @@ exports.checkToken = (req, res, next) => {
         return res.status(401).json({ error: 'Token invalide ou expiré' });
     }
 };
+
+/**
+ * Middleware pour vérifier le token JWT (WEB)
+ * @param {Object} req - Requête Express
+ * @param {Object} res - Réponse Express
+ * @param {Function} next - Fonction next
+ */
+exports.checkTokenWeb = (req, res, next) => {
+    // Récupérer le token depuis les cookies
+    const token = req.cookies.token;
+
+    // Vérifier si le token existe
+    if (!token) {
+        // Rédiriger l'utilisateur vers la page d'accueil
+        return res.redirect('/');
+    }
+
+    try {
+        // Vérifier et décoder le token
+        const decoded = jwt.verify(token, process.env.SECRET_KEY);
+
+        // Ajouter les infos de l'utilisateur dans req pour les routes suivantes
+        req.user = decoded;
+
+        // Passer au middleware/route suivant
+        next()
+
+    } catch (error) {
+        // Supprimer le cookie
+        res.clearCookie('token');
+        
+        // Rédiriger l'utilisateur vers la page d'accueil
+        return res.redirect('/');
+    }
+}

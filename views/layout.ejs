@@ -55,10 +55,13 @@
                                 <i class="bi bi-file-text"></i> Documentation API
                             </a>
                         </li>
+                        <!-- Bouton "déconnexion" qui s'affiche que si l'utilisateur est connecté -->
                         <li class="nav-item bg-danger rounded ms-4">
+                            <% if (user) { %>
                             <a class="nav-link text-light" href="/logout">
                                 <i class="bi bi-box-arrow-right"></i> Déconnexion
                             </a>
+                            <% } %>
                         </li>
                     </ul>
                 </div>
