@@ -1,0 +1,119 @@
+<div class="container">
+
+    <!-- En-tête -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <h2>
+                <i class="bi bi-calendar-check"></i> Gestion des Réservations
+            </h2>
+        </div>
+    </div>
+
+    <!-- Boutons -->
+    <div class="row mb-3">
+        <div class="col-12">
+            <!-- Nouvelle réservation -->
+            <a href="/reservations/add" class="btn btn-success">
+                <i class="bi bi-plus-circle"></i> Nouvelle réservation
+            </a>
+
+            <!-- Retour au dashboard-->
+            <a href="/dashboard" class="btn btn-secondary">
+                <i class="bi bi-arrow-left"></i> Retour au dashboard
+            </a>
+        </div>
+    </div>
+
+    <!-- Messages -->
+    <!-- Succès -->
+    <% if (success) { %>
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <i class="bi bi-check-circle"></i> <%= success %>
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+    <% } %>
+
+    <!-- Erreur -->
+    <% if (error) { %>
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <i class="bi bi-exclamation-triangle"></i> <%= error %>
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+    <% } %>
+
+    <!-- Tableau -->
+    <div class="row">
+        <div class="col-12">
+            <div class="card shadow">
+                <div class="card-body">
+                    
+                    <% if (reservations.length === 0) { %>
+                        <div class="alert alert-info">
+                            <i class="bi bi-info-circle"></i> Aucune réservation enregistrée
+                        </div>
+
+                    <% } else { %>
+                        <div class="table-responsive">
+                            <table class="class table table-hover table-striped">
+
+                                <!-- Tableau head -->
+                                <thead class="table-dark">
+                                    <tr>
+                                        <th>Catway N°</th>
+                                        <th>Client</th>
+                                        <th>Bateau</th>
+                                        <th>Début</th>
+                                        <th>Fin</th>
+                                        <th>Statut</th>
+                                        <th class="text-center">Actions</th>
+                                    </tr>
+                                </thead>
+
+                                <!-- Tableau body -->
+                                <tbody>
+                                    <% reservations.forEach(reservation => {
+                                        const today    = new Date();
+                                        const start    = new Date(reservation.startDate);
+                                        const end      = new Date(reservation.endDate);
+                                        let status     = '';
+                                        let badgeClass = '';
+                                        if (end < today) {
+                                            status     = 'Terminée';
+                                            badgeClass = 'bg-secondary';
+                                        } else if (start > today) {
+                                            status     = 'À venir';
+                                            badgeClass = 'bg-info';
+                                        } else {
+                                            status     = 'En cours';
+                                            badgeClass = 'bg-success';
+                                        }
+                                    %>
+                                    <tr>
+                                        <td><strong class="text-primary">#<%= reservation.catwayNumber %></strong></td>
+                                        <td><%= reservation.clientName %></td>
+                                        <td><%= reservation.boatName %></td>
+                                        <td><%= start.toLocaleDateString('fr-FR') %></td>
+                                        <td><%= end.toLocaleDateString('fr-FR') %></td>
+                                        <td><span class="badge <%= badgeClass %>"><%= status %></span></td>
+                                        <td class="text-center">
+                                            <a href="/reservations/<%= reservation._id %>/edit" class="btn btn-sm btn-warning">
+                                                <i class="bi bi-pencil"></i> Modifier
+                                            </a>
+                                            <button onclick="confirmDelete('<%= reservation._id %>')" class="btn btn-sm btn-danger">
+                                                <i class="bi bi-trash"></i> Supprimer
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <% }); %>
+                                </tbody>
+                            </table>
+                        </div>
+                    
+                    <% } %>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="/javascripts/reservations.js"></script>

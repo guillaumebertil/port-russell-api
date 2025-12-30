@@ -1,0 +1,91 @@
+<div class="container">
+    
+    <!-- En-tête -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <h2>
+                <i class="bi bi-pencil"></i> Modifier la réservation
+            </h2>
+        </div>
+    </div>
+
+    <!-- Formulaire -->
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow">
+                <div class="card-body">
+                    
+                    <% if (error) { %>
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <i class="bi bi-exclamation-triangle"></i> <%= error %>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    </div>
+                    <% } %>
+
+                    <form action="/reservations/<%= reservation._id %>/edit" method="POST">
+                        
+                        <div class="row">
+                            <!-- Catway (non modifiable) -->
+                            <div class="col-md-6 mb-3">
+                                <label for="catwayNumber" class="form-label">
+                                    <i class="bi bi-water"></i> Catway
+                                </label>
+                                <input type="text" class="form-control" value="Catway #<%= reservation.catwayNumber %>" disabled>
+                                <small class="text-muted">Le catway ne peut pas être modifié</small>
+                            </div>
+
+                            <!-- Client -->
+                            <div class="col-md-6 mb-3">
+                                <label for="clientName" class="form-label">
+                                    <i class="bi bi-person"></i> Nom du client *
+                                </label>
+                                <input type="text" class="form-control" id="clientName" name="clientName" value="<%= reservation.clientName %>" required>
+                            </div>
+                        </div>
+
+                        <!-- Bateau -->
+                        <div class="mb-3">
+                            <label for="boatName" class="form-label">
+                                <i class="bi bi-ship"></i> Nom du bateau *
+                            </label>
+                            <input type="text" class="form-control" id="boatName" name="boatName" value="<%= reservation.boatName %>" required>
+                        </div>
+
+                        <div class="row">
+                            <!-- Date début -->
+                            <div class="col-md-6 mb-3">
+                                <label for="startDate" class="form-label">
+                                    <i class="bi bi-calendar"></i> Date de début *
+                                </label>
+                                <input type="date" class="form-control" id="startDate" name="startDate" value="<%= reservation.startDate.toISOString().split('T')[0] %>" required>
+                            </div>
+
+                            <!-- Date fin -->
+                            <div class="col-md-6 mb-3">
+                                <label for="endDate" class="form-label">
+                                    <i class="bi bi-calendar-check"></i> Date de fin *
+                                </label>
+                                <input type="date" class="form-control" id="endDate" name="endDate" value="<%= reservation.endDate.toISOString().split('T')[0] %>" required>
+                            </div>
+                        </div>
+
+                        <!-- Info -->
+                        <div class="alert alert-info">
+                            <i class="bi bi-info-circle"></i> Les nouvelles dates seront vérifiées pour éviter les chevauchements
+                        </div>
+
+                        <!-- Boutons -->
+                        <div class="d-flex justify-content-between">
+                            <a href="/reservations" class="btn btn-secondary">
+                                <i class="bi bi-x-circle"></i> Annuler
+                            </a>
+                            <button type="submit" class="btn btn-warning">
+                                <i class="bi bi-check-circle"></i> Modifier
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

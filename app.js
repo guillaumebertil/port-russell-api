@@ -5,6 +5,7 @@ const logger           = require('morgan');
 const cors             = require('cors');
 const expressLayouts   = require('express-ejs-layouts');
 const catwaysWebRouter = require('./routes/catwaysWeb');
+const reservationsWebRouter = require('./routes/reservationsWeb');
 
 // Import de la connexion MongoDB
 const { initClientDbConnection } = require('./db/mongo');
@@ -51,12 +52,15 @@ app.use(cors({
     origin        : '*'
 }));
 
-// Routes
+// Routes WEB
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/catways', catwaysWebRouter);
-app.use('/', reservationsRouter);
+app.use('/reservations', reservationsWebRouter);
+
+// Routes API
 app.use('/api/catways', catwaysRouter)
+app.use('/api.reservations', reservationsRouter);
 
 // Gestion erreur 404
 app.use((req, res, next) => {

@@ -1,0 +1,96 @@
+<div class="container">
+
+    <!-- En-tête -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <h2>
+                <i class="bi bi-plus-circle"></i> Nouvelle réservation
+            </h2>
+        </div>
+    </div>
+
+    <!-- Formulaire -->
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow">
+                <div class="card-body">
+                    <% if (error) { %>
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <i class="bi bi-exclamation-triangle"></i> <%= error %>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    </div>
+                    <% } %>
+
+                    <form action="/reservations/add" method="POST">
+
+                        <div class="row">
+                            <!-- Catway -->
+                            <div class="col-md-6 mb-3">
+                                <label for="catwayNumber" class="form-label">
+                                    <i class="bi bi-water"></i> Catway *
+                                </label>
+                                <select class="form-select" name="catwayNumber" id="catwayNumber" required>
+                                    <option value="">-- Choisir un catway --</option>
+                                    <% catways.forEach(catway => { %>
+                                        <option value="<%= catway.catwayNumber %>">
+                                            Catway #<%= catway.catwayNumber %> (<%= catway.catwayType %>)
+                                        </option>
+                                    <% }); %>
+                                </select>
+                            </div>
+
+                            <!-- Client -->
+                            <div class="col-md-6 mb-3">
+                                <label for="clientName" class="form-label">
+                                    <i class="bi bi-person"></i> Nom du client *
+                                </label>
+                                <input type="text" class="form-control" id="clientName" name="clientName" required>
+                            </div>
+                        </div>
+
+                        <!-- Bateau -->
+                        <div class="mb-3">
+                            <label for="boatName" class="form-label">
+                                <i class="bi bi-ship"></i> Nom du bateau *
+                            </label>
+                            <input type="text" class="form-control" id="boatName" name="boatName" required>
+                        </div>
+
+                        <div class="row">
+                            <!-- Date de début -->
+                            <div class="col-md-6 mb-3">
+                                <label for="startDate" class="form-label">
+                                    <i class="bi bi-calendar"></i> Date de début *
+                                </label>
+                                <input type="date" class="form-control" id="startDate" name="startDate" required>
+                            </div>
+
+                            <!-- Date de fin -->
+                            <div class="col-md-6 mb-3">
+                                <label for="endDate" class="form-label">
+                                    <i class="bi bi-calendar-check"></i> Date de fin *
+                                </label>
+                                <input type="date" class="form-control" id="endDate" name="endDate" required>
+                            </div>
+                        </div>
+
+                        <!-- Info -->
+                        <div class="alert alert-info">
+                            <i class="bi bi-info-circle"></i> La disponibilité sera vérifiée automatiquement
+                        </div>
+
+                        <!-- Boutons -->
+                        <div class="d-flex justify-content-between">
+                            <a href="/reservations" class="btn btn-secondary">
+                                <i class="bi bi-x-circle"></i> Annuler
+                            </a>
+                            <button type="submit" class="btn btn-success">
+                                <i class="bi bi-check-circle"></i> Créer la réservation
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
