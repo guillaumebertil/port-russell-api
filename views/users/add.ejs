@@ -1,0 +1,81 @@
+<div class="container">
+    
+    <!-- En-tête -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <h2>
+                <i class="bi bi-plus-circle"></i> Ajouter un utilisateur
+            </h2>
+        </div>
+    </div>
+
+    <!-- Formulaire -->
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow">
+                <div class="card-body">
+
+                    <% if (error) { %>
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <i class="bi bi-exclamation-triangle"></i> <%= error %>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    </div>
+                    <% } %>
+
+                    <form action="/users/add" method="POST">
+
+                        <!-- Username -->
+                        <div class="mb-3">
+                            <label for="username" class="form-label">
+                                <i class="bi bi-person"></i> Nom d'utilisateur *
+                            </label>
+                            <input type="text" class="form-control" id="username" name="username" required>
+                        </div>
+
+                        <!-- Email -->
+                        <div class="mb-3">
+                            <label for="email" class="form-label">
+                                <i class="bi bi-envelope"></i> Email *
+                            </label>
+                            <input type="email" class="form-control" id="email" name="email" required>
+                        </div>
+
+                        <!-- Password -->
+                        <div class="mb-3">
+                            <label for="password" class="form-label">
+                                <i class="bi bi-lock"></i> Mot de passe *
+                            </label>
+                            <input type="password" class="form-control" id="password" name="password" minlength="8" required>
+                            <small>Minimum 8 caractères</small>
+                        </div>
+
+                        <!-- Confirmation du password -->
+                        <div class="mb-3">
+                            <label for="passwordConfirm" class="form-label">
+                                <i class="bi bi-lock-fill"></i> Confirmer le mot de passe *
+                            </label>
+                            <input type="password" class="form-control" id="passwordConfirm" name="passwordConfirm" minlength="8" required>
+                        </div>
+
+                        <!-- Boutons -->
+                        <div class="d-flex justify-content-between">
+
+                            <!-- Annuler -->
+                            <a href="/users" class="btn btn-secondary">
+                                <i class="bi bi-x-circle"></i> Annuler
+                            </a>
+
+                            <!-- Ajouter -->
+                            <button type="submit" class="btn btn-success">
+                                <i class="bi bi-check-circle"></i> Ajouter
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Importation du script -->
+<script src="/javascripts/users.js"></script>

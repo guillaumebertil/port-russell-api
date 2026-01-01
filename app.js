@@ -1,11 +1,12 @@
-const express          = require('express');
-const path             = require('path');
-const cookieParser     = require('cookie-parser');
-const logger           = require('morgan');
-const cors             = require('cors');
-const expressLayouts   = require('express-ejs-layouts');
-const catwaysWebRouter = require('./routes/catwaysWeb');
+const express               = require('express');
+const path                  = require('path');
+const cookieParser          = require('cookie-parser');
+const logger                = require('morgan');
+const cors                  = require('cors');
+const expressLayouts        = require('express-ejs-layouts');
+const catwaysWebRouter      = require('./routes/catwaysWeb');
 const reservationsWebRouter = require('./routes/reservationsWeb');
+const usersWebRouter        = require('./routes/usersWeb')
 
 // Import de la connexion MongoDB
 const { initClientDbConnection } = require('./db/mongo');
@@ -54,13 +55,14 @@ app.use(cors({
 
 // Routes WEB
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/users', usersWebRouter);
 app.use('/catways', catwaysWebRouter);
 app.use('/reservations', reservationsWebRouter);
 
 // Routes API
+app.use('/api/users', usersRouter);
 app.use('/api/catways', catwaysRouter)
-app.use('/api.reservations', reservationsRouter);
+app.use('/api/reservations', reservationsRouter);
 
 // Gestion erreur 404
 app.use((req, res, next) => {

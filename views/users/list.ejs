@@ -1,10 +1,10 @@
 <div class="container">
-    
+
     <!-- En-tête -->
     <div class="row mb-4">
         <div class="col-12">
             <h2>
-                <i class="bi bi-water"></i> Gestion des Catways
+                <i class="bi bi-people"></i> Gestion des utilisateurs
             </h2>
         </div>
     </div>
@@ -12,9 +12,9 @@
     <!-- Boutons -->
     <div class="row mb-3">
         <div class="col-12">
-            <!-- Ajouter un catway -->
-            <a href="/catways/add" class="btn btn-success">
-                <i class="bi bi-plus-circle"></i> Ajouter un catway
+            <!-- Ajouter un utilisateur -->
+            <a href="/users/add" class="btn btn-success">
+                <i class="bi bi-plus-circle"></i> Ajouter un utilisateur
             </a>
 
             <!-- Retour au dashboard -->
@@ -42,15 +42,15 @@
     </div>
     <% } %>
 
-    <!-- Tableau des catways -->
+    <!-- Tableau -->
     <div class="row">
         <div class="col-12">
             <div class="card shadow">
                 <div class="card-body">
-                    
-                    <% if (catways.length === 0) { %>
+
+                    <% if (users.length === 0 ) { %>
                     <div class="alert alert-info">
-                        <i class="bi bi-info-circle"></i> Aucun catway enregistré
+                        <i class="bi bi-info-circle"></i> Aucun utilisateur enregistré
                     </div>
                     <% } else { %>
                         <div class="table-responsive">
@@ -59,35 +59,33 @@
                                 <!-- Tableau header -->
                                 <thead class="table-dark">
                                     <tr>
-                                        <th>Numéro</th>
-                                        <th>Type</th>
-                                        <th>État</th>
+                                        <th>Nom d'utilisateur</th>
+                                        <th>Email</th>
+                                        <th>Date de création</th>
                                         <th class="text-center">Actions</th>
                                     </tr>
                                 </thead>
 
                                 <!-- Tableau body -->
                                 <tbody>
-                                    <% catways.forEach(catway => { %>
+                                    <% users.forEach(u => { %>
                                     <tr>
-                                        <td>
-                                            <strong class="text-primary">#<%= catway.catwayNumber %></strong>
-                                        </td>
-                                        <td>
-                                            <% if (catway.catwayType === 'long') { %>
-                                                <span class="badge bg-info">Long</span>
-                                            <% } else { %>
-                                                <span class="badge bg-secondary">Short</span>
-                                            <% } %>
-                                        </td>
-                                        <td><%= catway.catwayState %></td>
+                                        <td><i class="bi bi-person-circle"></i> <strong><%= u.username %></strong></td>
+                                        <td><%= u.email %></td>
+                                        <td><%= new Date(u.createdAt).toLocaleDateString('fr-FR') %></td>
                                         <td class="text-center">
-                                            <a href="/catways/<%= catway.catwayNumber %>/edit" class="btn btn-sm btn-warning">
+                                            <a href="/users/<%= u.email %>/edit" class="btn btn-sm btn-warning">
                                                 <i class="bi bi-pencil"></i> Modifier
                                             </a>
-                                            <button onclick="confirmDelete('<%= catway.catwayNumber %>')" class="btn btn-sm btn-danger">
-                                                <i class="bi bi-trash"></i> Supprimer
-                                            </button>
+                                            <% if (u.email !== user.email) { %>
+                                                <button onclick="confirmDelete('<%= u.email %>')" class="btn btn-sm btn-danger">
+                                                    <i class="bi bi-trash"></i> Supprimer
+                                                </button>
+                                            <% } else { %>
+                                                <button class="btn btn-sm btn-secondary" disabled title="Vous ne pouvez pas supprimer ce compte">
+                                                    <i class="bi bi-trash"></i> Supprimer
+                                                </button>
+                                            <% } %>
                                         </td>
                                     </tr>
                                     <% }); %>
@@ -102,4 +100,4 @@
 </div>
 
 <!-- Importation du script -->
-<script src="/javascripts/catways.js"></script>
+<script src="/javascripts/users.js"></script>

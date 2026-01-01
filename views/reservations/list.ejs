@@ -25,6 +25,7 @@
     </div>
 
     <!-- Messages -->
+
     <!-- Succès -->
     <% if (success) { %>
     <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -48,15 +49,15 @@
                 <div class="card-body">
                     
                     <% if (reservations.length === 0) { %>
-                        <div class="alert alert-info">
-                            <i class="bi bi-info-circle"></i> Aucune réservation enregistrée
-                        </div>
+                    <div class="alert alert-info">
+                        <i class="bi bi-info-circle"></i> Aucune réservation enregistrée
+                    </div>
 
                     <% } else { %>
                         <div class="table-responsive">
                             <table class="class table table-hover table-striped">
 
-                                <!-- Tableau head -->
+                                <!-- Tableau header -->
                                 <thead class="table-dark">
                                     <tr>
                                         <th>Catway N°</th>
@@ -116,4 +117,5 @@
     </div>
 </div>
 
+<!-- Importation du script -->
 <script src="/javascripts/reservations.js"></script>
