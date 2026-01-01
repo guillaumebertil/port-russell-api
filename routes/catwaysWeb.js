@@ -1,142 +1,42 @@
-const express = require('express');
-const router  = express.Router();
-const Catway  = require('../models/catway');
-const auth    = require('../middlewares/auth');
+const express           = require('express');
+const router            = express.Router();
+const catwaysController = require('../controllers/catwayController');
+const auth              = require('../middlewares/auth');
 
 /**
- * GET /catways - Liste des catways (PAGE WEB)
+ * GET /catways
+ * Affiche la liste des catways (page web)
  */
-router.get('/', auth.checkTokenWeb, async (req, res) => {
-    try {
-        const catways = await Catway.find().sort({ catwayNumber: 1 });
-        
-        res.render('catways/list', {
-            title  : 'Liste des Catways',
-            user   : req.user,
-            catways: catways,
-            success: req.query.success || null,
-            error  : req.query.error || null
-        });
-        
-    } catch (error) {
-        res.status(500).send('Erreur serveur');
-    }
-});
+router.get('/', auth.checkTokenWeb, catwaysController.listCatways);
 
 /**
- * GET /catways/add - Formulaire ajout (PAGE WEB)
+ * GET /catways/add
+ * Affiche le formulaire d'ajout d'un catway (page web)
  */
-router.get('/add', auth.checkTokenWeb, (req, res) => {
-    res.render('catways/add', {
-        title: 'Ajouter un Catway',
-        user : req.user,
-        error: null
-    });
-});
+router.get('/add', auth.checkTokenWeb, catwaysController.showAddForm);
 
 /**
- * POST /catways/add - Ajouter un catway (PAGE WEB)
+ * POST /catways/add
+ * Crée un nouveau catway (traitement du formulaire – page web)
  */
-router.post('/add', auth.checkTokenWeb, async (req, res) => {
-    try {
-        const { catwayNumber, catwayType, catwayState } = req.body;
-
-        // Vérifier si le numéro existe déjà
-        const existing = await Catway.findOne({ catwayNumber });
-        if (existing) {
-            return res.render('catways/add', {
-                title: 'Ajouter un Catway',
-                user : req.user,
-                error: 'Ce numéro de catway existe déjà'
-            });
-        }
-
-        // Créer le catway
-        const catway = new Catway({
-            catwayNumber: parseInt(catwayNumber),
-            catwayType,
-            catwayState
-        });
-
-        await catway.save();
-        res.redirect('/catways?success=Catway ajouté avec succès');
-
-    } catch (error) {
-        res.render('catways/add', {
-            title: 'Ajouter un Catway',
-            user : req.user,
-            error: 'Erreur lors de l\'ajout'
-        });
-    }
-});
+router.post('/add', auth.checkTokenWeb, catwaysController.createCatway);
 
 /**
- * GET /catways/:id/edit - Formulaire modification (PAGE WEB)
+ * GET /catways/:id/edit
+ * Affiche le formulaire de modification d'un catway (page web)
  */
-router.get('/:id/edit', auth.checkTokenWeb, async (req, res) => {
-    try {
-        const catwayNumber = parseInt(req.params.id);
-        const catway = await Catway.findOne({ catwayNumber });
-
-        if (!catway) {
-            return res.redirect('/catways?error=Catway non trouvé');
-        }
-
-        res.render('catways/edit', {
-            title : 'Modifier un Catway',
-            user  : req.user,
-            catway: catway,
-            error : null
-        });
-    } catch (error) {
-        res.redirect('/catways?error=Erreur serveur');
-    }
-});
+router.get('/:id/edit', auth.checkTokenWeb, catwaysController.showEditForm);
 
 /**
- * POST /catways/:id/edit - Modifier un catway (PAGE WEB)
+ * POST /catways/:id/edit
+ * Met à jour l'état d'un catway existant (page web)
  */
-router.post('/:id/edit', auth.checkTokenWeb, async (req, res) => {
-    try {
-        const catwayNumber = parseInt(req.params.id);
-        const { catwayState } = req.body;
-
-        // Mise à jour (seulement l'état)
-        const catway = await Catway.findOneAndUpdate(
-            { catwayNumber },
-            { catwayState },
-            { new: true, runValidators: true }
-        );
-
-        if (!catway) {
-            return res.redirect('/catways?error=Catway non trouvé');
-        }
-
-        res.redirect('/catways?success=Catway modifié avec succès');
-
-    } catch (error) {
-        res.redirect('/catways?error=Erreur lors de la modification');
-    }
-});
+router.post('/:id/edit', auth.checkTokenWeb, catwaysController.updateCatway);
 
 /**
- * POST /catways/:id/delete - Supprimer un catway (PAGE WEB)
+ * POST /catways/:id/delete
+ * Supprime un catway existant (page web)
  */
-router.post('/:id/delete', auth.checkTokenWeb, async (req, res) => {
-    try {
-        const catwayNumber = parseInt(req.params.id);
-        
-        const catway = await Catway.findOneAndDelete({ catwayNumber });
-
-        if (!catway) {
-            return res.redirect('/catways?error=Catway non trouvé');
-        }
-
-        res.redirect('/catways?success=Catway supprimé avec succès');
-
-    } catch (error) {
-        res.redirect('/catways?error=Erreur lors de la suppression');
-    }
-});
+router.post('/:id/delete', auth.checkTokenWeb, catwaysController.deleteCatway);
 
 module.exports = router;
