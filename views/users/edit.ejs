@@ -14,6 +14,8 @@
         <div class="col-md-6">
             <div class="card shadow">
                 <div class="card-body">
+
+                    <!-- Affiche un message si ereur -->
                     <% if (error) { %>
                         <div class="alert alert-danger alert-dismissible fade show" role="alert">
                             <i class="bi bi-exclamation-triangle"></i> <%= error %>
@@ -58,6 +60,7 @@
 
                             <!-- Boutons -->
                             <div class="d-flex justify-content-between">
+                                
                                 <!-- Annuler -->
                                 <a href="/users" class="btn btn-secondary">
                                     <i class="bi bi-x-circle"></i> Annuler

@@ -15,6 +15,7 @@
             <div class="card shadow">
                 <div class="card-body">
                     
+                    <!-- Affiche un message si ereur -->
                     <% if (error) { %>
                     <div class="alert alert-danger alert-dismissible fade show" role="alert">
                         <i class="bi bi-exclamation-triangle"></i> <%= error %>
@@ -76,9 +77,13 @@
 
                         <!-- Boutons -->
                         <div class="d-flex justify-content-between">
+
+                            <!-- Annuler -->
                             <a href="/reservations" class="btn btn-secondary">
                                 <i class="bi bi-x-circle"></i> Annuler
                             </a>
+
+                            <!-- Modifier -->
                             <button type="submit" class="btn btn-warning">
                                 <i class="bi bi-check-circle"></i> Modifier
                             </button>
