@@ -67,7 +67,7 @@ app.use('/api/catways', catwaysRouter)
 app.use('/api/reservations', reservationsRouter);
 
 // Swagger
-app.use('/api/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpecs));
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpecs));
 
 // Gestion erreur 404
 app.use((req, res, next) => {
