@@ -4,7 +4,8 @@
  * Module dependencies.
  */
 
-const app  = require('../app');
+const app = require('../app');
+const debug = require('debug')('port-russell-api:server');
 const http = require('http');
 
 /**
