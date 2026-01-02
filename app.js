@@ -6,7 +6,9 @@ const cors                  = require('cors');
 const expressLayouts        = require('express-ejs-layouts');
 const catwaysWebRouter      = require('./routes/catwaysWeb');
 const reservationsWebRouter = require('./routes/reservationsWeb');
-const usersWebRouter        = require('./routes/usersWeb')
+const usersWebRouter        = require('./routes/usersWeb');
+const swaggerUi             = require('swagger-ui-express');
+const swaggerSpecs          = require('./swagger.config');
 
 // Import de la connexion MongoDB
 const { initClientDbConnection } = require('./db/mongo');
@@ -63,6 +65,9 @@ app.use('/reservations', reservationsWebRouter);
 app.use('/api/users', usersRouter);
 app.use('/api/catways', catwaysRouter)
 app.use('/api/reservations', reservationsRouter);
+
+// Swagger
+app.use('/api/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpecs));
 
 // Gestion erreur 404
 app.use((req, res, next) => {
